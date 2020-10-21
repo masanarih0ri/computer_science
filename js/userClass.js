@@ -4,7 +4,7 @@ class User {
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
-        this.passwordHashed = passwordHashed;
+        this.passwordHashed = hashPassword(passwordHashed);
         this.birthMonth = birthMonth;
         this.birthYear = birthYear;
         this.biographyDescription = biographyDescription;
@@ -35,8 +35,7 @@ class User {
     }
     
     confirmPassword(strPassword) {
-      const hashedPassword = hashPassword(strPassword);
-      return hashedPassword === hashPassword(this.passwordHashed);
+      return this.passwordHashed === hashPassword(strPassword);
     }
 }
 
