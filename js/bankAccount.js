@@ -20,9 +20,10 @@ class BankAccount {
   }
   
   withdrawMoney(withdrawAmount) {
-    if(withdrawAmount >= 5000) {
-      this.savings -= this.savings * 0.2;
-      return this.savings * 0.2;
+    const maxWithdrawAmount = this.savings * 0.2;
+    if(withdrawAmount >= maxWithdrawAmount) {
+      this.savings -= maxWithdrawAmount;
+      return maxWithdrawAmount;
     } else {
       this.savings -= withdrawAmount;
       return withdrawAmount;
@@ -35,7 +36,13 @@ class BankAccount {
 }
 
 let account = new BankAccount("Chase", "Claire Simmons", 30000, 0.010001);
+let account2 = new BankAccount("Bank Of America", "Remy Clay", 10000, 0.010001);
 console.log(account.showInfo());
 console.log(account.withdrawMoney(1000));
 console.log(account.depositMoney(10000));
 console.log(account.pastTime(200));
+
+console.log(account2.showInfo());
+console.log(account2.withdrawMoney(5000));  //-> 2000
+console.log(account2.depositMoney(12000)); //-> 19900
+console.log(account2.pastTime(500)); //-> 2882404.7506039334
