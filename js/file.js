@@ -1,12 +1,71 @@
 class File {
   constructor(fileName, fileExtension, content, locked, parentFolder) {
     this.fileName = fileName;
-    this.fileExtension = fileExtension;
+    this.fileExtension = defineFileExtension(fileExtension);
     this.content = content;
     this.locked = locked;
     this.parentFolder = parentFolder;
   }
+  
+  getLifetimeBandwidthSize() {
+    const bandWidthSizeMB = this.content.length * 10;
+    if(bandWidthSizeMB >= 1000){
+      return `${bandWidthSizeMB / 1000}GB`;
+    } else {
+      return `${bandWidthSizeMB}MB`;
+    }
+  }
+  
+  getFileType() {
+    if([".txt", ".pdf", ".word"].includes(this.fileExtension)) {
+      return "document";
+    } else if ([".js", ".css", ".html"].includes(this.fileExtension)) {
+      return "source-code";
+    } else if ([".mp4"].includes(this.fileExtension)) {
+      return "video";
+    } else if ([".mp3"].includes(this.fileExtension)){
+      return "music"
+    }
+  }
+  
+  prependContent(prependString) {
+    if(this.locked) return;
+    // prependContentで返すのはthis.contentの先頭にprependStringを付け足したもの
+  }
+  
+  appendContent(appendString) {
+    if(this.locked) return;
+    // appendContentで返すのはthis.contentの後ろにpappendContentを付け足したもの（最初のthis.contentから見ると、差分はprependStringとappendString）
+  }
+  
+  addContent(addString, position) {
+    if(this.locked) return;
+    // addContentで返すのは最初のthis.contentのposition番目の位置にaddStringが入ったもの（最初のthis.contentから見ると、差分はprependStringとappendString、addString）
+  }
+  
+  // this.contentを更新していくやり方だと、addContentの時に最初のthis.contentのposition番目の位置にaddStringが入れるのが無理っぽい…？
+  
+  // this.contentを変更せずに変数にコピーするやり方だとappendContentでprependContentを呼び出す時に引数の定義でエラーになる…
+  
+  showFileLocation() {
+    return `${this.parentFolder} > ${this.fileName}${this.fileExtension}`;
+  }
 }
+
+function defineFileExtension(fileType) {
+  const fileTypes = [".word", ".png", ".js", ".css", ".html", ".mp4", ".mp3", ".pdf"];
+  return fileTypes.includes(fileType) ? fileType : ".txt"
+}
+
+let file = new File("assignment", ".word","Something that occurs too early before preparations are ready. Starting too soon.", false, "homework");
+
+console.log(file.getLifetimeBandwidthSize());
+console.log(file.fileExtension);
+console.log(file.getFileType());
+console.log(file.prependContent("good morning "));
+// console.log(file.appendContent(" good evening."));
+console.log(file.addContent("hello world ", 13));
+console.log(file.showFileLocation());
 
 // 状態
 
