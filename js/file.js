@@ -42,9 +42,6 @@ class File {
   
   addContent(addString, position) {
     if(this.locked) return;
-    console.log(this.content.slice(0, position));
-    console.log(addString);
-    console.log(this.content.slice(position))
     return `${this.content.slice(0, position)}${addString}${this.content.slice(position)}`;
   }
   
