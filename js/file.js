@@ -42,7 +42,8 @@ class File {
   
   addContent(addString, position) {
     if(this.locked) return;
-    return `${this.content.slice(0, position)}${addString}${this.content.slice(position)}`;
+    this.content = this.content.slice(0, position) + addString + this.content.slice(position);
+    return this.content;
   }
   
   showFileLocation() {
