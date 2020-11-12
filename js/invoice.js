@@ -33,12 +33,17 @@ class Invoice {
       ADDRESS : ${this.companyAddress}
       BILL TO : ${this.billToName}
       ADDRESS : ${this.billToAddress}
-      shampoo($10)--- 7 pcs. --- AMOUNT: 70
-      conditioner($5)--- 9 pcs. --- AMOUNT: 45
-      tooth brush($3)--- 10 pcs. --- AMOUNT: 30
-      SUBTOTAL : ${this.amountDue()}
-      TAX : ${this.amountDue() * 0.1}
-      TOTAL : ${this.amountDue() * 1.1}
+    `)
+    
+    while(currentNode !== null) {
+      console.log(`${currentNode.product.productName}($${currentNode.product.price})--- ${currentNode.quantity} pcs. --- AMOUNT: ${currentNode.product.price * currentNode.quantity}`);
+      currentNode = currentNode.invoiceItemNextNode;
+    }
+    
+    console.log(`
+      SUBTOTAL : ${this.amountDue(false)}
+      TAX : ${this.amountDue(false) * 0.1}
+      TOTAL : ${this.amountDue(true)}
     `)
   }
 }
