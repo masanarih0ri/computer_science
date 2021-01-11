@@ -28,6 +28,11 @@ class Deck {
     return newDeck;
   }
   
+  // デッキからカードをドローするメソッドを作る
+  draw() {
+    return this.deck.pop();
+  }
+  
   // Deck全てを表示するメソッドを作る
   printDeck() {
     for(let i = 0; i < this.deck.length; i++) {
@@ -50,4 +55,6 @@ class Deck {
 let deck1 = new Deck();
 // deck1.printDeck();
 deck1.shuffleDeck();
-deck1.printDeck();
+// deck1.printDeck();
+console.log(deck1.deck[deck1.deck.length - 1]);
+console.log(deck1.draw().getCardString())
