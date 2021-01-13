@@ -52,9 +52,28 @@ class Deck {
   }
 }
 
-let deck1 = new Deck();
-// deck1.printDeck();
-deck1.shuffleDeck();
-// deck1.printDeck();
-console.log(deck1.deck[deck1.deck.length - 1]);
-console.log(deck1.draw().getCardString())
+// ディーラーのステートレスオブジェクトを作る
+class Dealer {
+  // インスタンス化が必要ないので、static を用いた関数だけかく
+  static startGame(amountOfPlayers) {
+    // tableオブジェクトを設定。プレイヤーの手札とデッキを
+    let table = {
+      "playerCards": [],
+      "deck": new Deck()
+    }
+    // デッキをシャッフルする
+    table["deck"].shuffleDeck();
+
+    for(let i = 0; i < amountOfPlayers; i++) {
+      let playerCard = [];
+      for(let j = 0; j < 2; j++) {
+        playerCard.push(table["deck"].draw());
+      }
+      table["playerCards"].push(playerCard);
+    }
+    return table["playerCards"];
+  }
+}
+
+let table1 = Dealer.startGame(5);
+console.log(table1)
