@@ -104,7 +104,28 @@ class Dealer {
       }
     }
   }
+  
+  // ブラックジャックでスコア計算するためのメソッドを追加
+  static score21Individual(cards) {
+    let value = 0;
+    for(let i = 0; i < cards.length; i++) {
+      value += cards[i].intValue;
+    }
+    if(value > 21) value = 0;
+    return value;
+  }
 }
 
-let table1 = Dealer.startGame(5, "poker");
-Dealer.printTableInformation(table1);
+// let table1 = Dealer.startGame(5, "poker");
+// Dealer.printTableInformation(table1);
+
+// PlayerAの手札
+let card1 = new Card("♦︎","A", 1);
+let card2 = new Card("♦︎","J", 11);
+
+// PlayerBの手札
+let card3 = new Card("♦︎","9", 9);
+let card4 = new Card("♦︎","K", 13);
+
+console.log(Dealer.score21Individual([card1, card2]));
+console.log(Dealer.score21Individual([card3, card4]));
