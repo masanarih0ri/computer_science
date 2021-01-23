@@ -80,20 +80,7 @@ class Dealer {
     if(gameMode === "poker") return 5;
     if(gameMode === "21") return 2;
   }
-  
-  // tableの情報を受け取り、プレイヤーのカードを表示するprintTableInformationというメソッドを作る
-  
-  // 以下のように出力してください。
-    // Amount of players: 3... Game mode: 21. At this table:
-    // Player 1 hand is:
-    // ♠55
-    // ♥A1
-    // Player 2 hand is:
-    // ♥66
-    // ♦1010
-    // Player 3 hand is:
-    // ♣J11
-    // ♠33
+
   static printTableInformation(table) {
     console.log(`Amount of players: ${table["playerCards"].length}... Game mode: ${table["gameMode"]}. At this table:`);
     
@@ -114,18 +101,47 @@ class Dealer {
     if(value > 21) value = 0;
     return value;
   }
+  
+  // ブラックジャックの勝者を表示するためのメソッドを追加
+  static winnerOf21(table) {
+    let points = [];
+    let cache = [];
+    
+    for(let i = 0; i < table["playerCards"].length; i++) {
+      let point = Dealer.score21Individual(table["playerCards"][i]);
+      points.push(point);
+      if(cache[point] >= 1) {
+        cache[point] += 1;
+      } else {
+        cache[point] = 1;
+      }
+    }
+    let maxIndex = HelperFunctions.maxInArrayIndex(points)
+    if(cache[points[maxIndex]] > 1){
+      return "draw";
+    } else if (cache[points[maxIndex]] >= 0) {
+      return `player ${maxIndex + 1} is Win`
+    } else {
+      return "No winners..";
+    }
+  }
 }
 
-// let table1 = Dealer.startGame(5, "poker");
-// Dealer.printTableInformation(table1);
+class HelperFunctions {
+  static maxInArrayIndex(intArr) {
+    let maxNumberIndex = 0;
+    let maxNumber = intArr[0];
+    for(let i = 1; i < intArr.length; i++) {
+      if(intArr[i] > maxNumber) {
+        maxNumber = intArr[i];
+        maxNumberIndex = i;
+      }
+    }
+    return maxNumberIndex;
+  }
+}
 
-// PlayerAの手札
-let card1 = new Card("♦︎","A", 1);
-let card2 = new Card("♦︎","J", 11);
+let table = Dealer.startGame(4, "21");
 
-// PlayerBの手札
-let card3 = new Card("♦︎","9", 9);
-let card4 = new Card("♦︎","K", 13);
-
-console.log(Dealer.score21Individual([card1, card2]));
-console.log(Dealer.score21Individual([card3, card4]));
+Dealer.printTableInformation(table);
+console.log(Dealer.winnerOf21(table));
