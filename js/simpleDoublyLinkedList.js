@@ -1,15 +1,17 @@
+//class Node
 class Node {
   constructor(data) {
     this.data = data;
-    this.prev = null;
     this.next = null;
+    this.prev = null;
   }
 }
 
+// class DoublyLinkedList
 class DoublyLinkedList {
   constructor(arr) {
     if(arr.length <= 0) {
-      this.head = new Node(null);
+      this.head = null;
       this.tail = this.head;
       return;
     }
@@ -34,7 +36,6 @@ class DoublyLinkedList {
     console.log(str);
   }
 }
-
 let numList = new DoublyLinkedList([35,23,546,67,86,234,56,767,34,1,98,78,555]);
 
 numList.printList();
