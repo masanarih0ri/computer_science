@@ -72,6 +72,7 @@ function createEmployeeCard(employee) {
   profiles.append(innerFlex);
 }
 
-createEmployeeCard(employee1);
-createEmployeeCard(employee2);
-createEmployeeCard(employee3);
+let employees = [employee1, employee2, employee3];
+employees.map(employee => {
+  createEmployeeCard(employee);
+});
