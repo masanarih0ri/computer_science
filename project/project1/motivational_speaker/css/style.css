@@ -1,0 +1,31 @@
+.image {
+  width: 100%;
+}
+
+.text {
+  font-size: 4vw;
+}
+
+.verticalTop {
+  top: 0;
+}
+
+.verticalCenter {
+  top: 50%;
+}
+
+.verticalBottom {
+  bottom: 0;
+}
+
+.horizontalLeft {
+  left: 0;
+}
+
+.horizontalCenter {
+  left: 50%;
+}
+
+.horizontalRight {
+  right: 0;
+}
