@@ -1,18 +1,3 @@
-// ここから書いてください。
-
-// motivationalSpeechWallpaper(phrase, colorCode, imageUrl, verticalPosition, horizontalPosition, domObject)
-
-// まず画像とテキストが表示されるようにする
-// bootstrapのclassとかで位置を指定するようなイメージ
-
-/*
-<div> relative
-  <img>
-  <p> absolute
-</div>
-
-*/ 
-
 function motivationalSpeechWallpaper(phrase, colorCode, imageUrl, verticalPosition, horizontalPosition, domObject) {
   // 画像の領域
   const wrapDiv = document.createElement("div");
