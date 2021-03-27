@@ -1,0 +1,16 @@
+.bg-red {
+  background-color: red;
+}
+
+.bg-green {
+  background-color: green;
+}
+
+.bg-blue {
+  background-color: blue;
+}
+
+.big-square {
+  width: 100vw;
+  height: 500px;
+}

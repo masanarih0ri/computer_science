@@ -15,3 +15,30 @@ let sectionInfo = [
     "description":"Elephants are mammals of the family Elephantidae and the largest existing land animals. Three species are currently recognised: the African bush elephant, the African forest elephant, and the Asian elephant. Elephantidae is the only surviving family of the order Proboscidea; extinct members include the mastodons. (Wikipedia)"
   },
 ];
+
+let tableOfContents = "<ul>";
+for(let i = 0; i < sectionInfo.length; i++) {
+  tableOfContents += `<li><a href="#sec${i}">${sectionInfo[i].title}</a></li>`;
+}
+tableOfContents += "</ul>"
+
+let containerSection = "";
+for(let i = 0; i < sectionInfo.length; i++) {
+  containerSection += `
+  <div id="sec${i}" class="bg-${sectionInfo[i].color} big-square">
+    <h2>${sectionInfo[i].title}</h2>
+    <p>${sectionInfo[i].description}</p>
+  </div>
+  `
+}
+
+
+// tableOfContentsとcontainerSectionに分けて要素を作る
+let htmlString = `
+<h1>Information: We are doing #{id} to jump to a section</h1>
+${tableOfContents}
+${containerSection}
+`
+
+// 最後にhtmlStringを挿入する
+document.getElementById("target").innerHTML = htmlString;
