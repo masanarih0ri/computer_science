@@ -1,0 +1,90 @@
+.card-items {
+  display: flex;
+  flex-wrap:wrap;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.card-item {
+  display: block;
+  width: 100%;
+  max-width: 342px;
+  margin: 0 36px 32px 0;
+  color: white;
+  text-align: center;
+}
+
+.card-item-image {
+  width: 100px;
+}
+
+.bg-red {
+  background-color: red;
+}
+
+.bg-yellow {
+  background-color: yellow;
+}
+
+.bg-beige {
+  background-color: beige;
+}
+
+.bg-grey {
+  background-color: grey;
+}
+
+.bg-purple {
+  background-color: purple;
+}
+
+.bg-green {
+  background-color: green;
+}
+
+.bg-orange {
+  background-color: orange;
+}
+
+.bg-black {
+  background-color: black;
+}
+
+.bg-pink {
+  background-color: pink;
+}
+
+.word-detail-inner {
+  padding: 32px 64px;
+}
+
+.word-detail-inner .emotion,
+.word-detail-inner .description {
+  color :white;
+}
+
+
+.onomatopoeia-wrapper {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+.onomatopoeia {
+  display: flex;
+  justify-content: space-between;
+  width: 45%;
+  background-color: white;
+  margin-bottom: 24px;
+  padding: 16px;
+}
+
+.onomatopeia-detail {
+  color: black;
+  width: 60%;
+}
+
+.onomatopeia-detail-image {
+  width: 30%;
+  max-width: 150px;
+}

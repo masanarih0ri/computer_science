@@ -7,24 +7,62 @@ class Word {
 }
 
 class EmotionObject {
+  // emotion:string description: string, color: string, onomatopoeia: array
   constructor(emotion, description, color, onomatopoeia) {
     this.emotion = emotion;
     this.description = description;
     this.color = color;
     this.onomatopoeia = onomatopoeia;
   }
+
+  getColor() {
+    return `bg-${this.color}`;
+  }
   
   // 感情のすべての擬音語のWordオブジェクトの配列を返します。
+  /*
+    return [{
+      word: "angry",
+      definition: "this is angry",
+      pictureUrl: "https://hoge.com"
+    },{},{}.....]
+  */
   getOnomatopoeiaWords() {
     let onomatopoeiaWords = [];
+    for(let i = 0; i < this.onomatopoeia.length; i++) {
+      let currentOnomatopoeia = this.onomatopoeia[i]
+      onomatopoeiaWords.push(new Word(currentOnomatopoeia, dictionary[currentOnomatopoeia], pictureDictionary[currentOnomatopoeia]))
+    }
+    return onomatopoeiaWords;
   }
-  // コンテナのHTMLを文字列を返します。このコンテナの背景は感情の色で、コンテナの上部には、感情と感情の説明が表示されています。次にこの感情の各擬音語とその定義、画像を含んだカードが表示されます。
+
+  // コンテナのHTMLの文字列を返します。このコンテナの背景は感情の色で、コンテナの上部には、感情と感情の説明が表示されています。次にこの感情の各擬音語とその定義、画像を含んだカードが表示されます。
   getHtmlContainerString() {
-    console.log("ok")
+    let onomatopoeiaWordsArray = this.getOnomatopoeiaWords()
     let htmlString = `
-    <h1>Category</h1>
+      <div class="word-detail-inner">
+        <h3 class="emotion">${this.emotion}</h3>
+        <p class="description">${this.description}</p>
+        <div class="onomatopoeia-wrapper">
     `;
-    document.getElementById("target").innerHTML = htmlString;
+
+    for(let i = 0;  i < onomatopoeiaWordsArray.length; i++) {
+      htmlString += `
+      <div class="onomatopoeia">
+        <div class="onomatopeia-detail">
+          <h4 class="onomatopeia-word">${onomatopoeiaWordsArray[i].word}</h4>
+          <p class="onomatopeia-word-definition">${onomatopoeiaWordsArray[i].definition}</p>
+        </div>
+        <img src="${onomatopoeiaWordsArray[i].pictureUrl}" class="onomatopeia-detail-image">
+      </div>
+      `
+    }
+
+    htmlString += `
+        </div>
+      </div>
+    `
+    return htmlString;
   }
 }
 
@@ -59,7 +97,7 @@ const dictionary = {
 
 const pictureDictionary = {
   "bark":"https://cdn.pixabay.com/photo/2013/07/25/11/59/german-shepherd-166972_1280.jpg",
-  "grunt":"https://cdn.pixabay.com/photo/2015/02/23/20/00/bodybuilder-646482_1280.jpg",
+  "grunt":"https://cdn.pixabay.com/photo/2019/03/10/19/43/pig-4047086_1280.jpg",
   "roar":"https://cdn.pixabay.com/photo/2018/04/13/21/24/lion-3317670_1280.jpg",
   "whack":"https://cdn.pixabay.com/photo/2017/10/27/11/49/boxer-2894025_1280.jpg",
   "smack":"https://cdn.pixabay.com/photo/2015/03/20/19/38/hammer-682767_1280.jpg",
@@ -71,10 +109,10 @@ const pictureDictionary = {
   "buzz":"https://cdn.pixabay.com/photo/2020/02/13/10/29/bees-4845211_1280.jpg",
   "caw":"https://cdn.pixabay.com/photo/2017/02/16/11/13/bird-2071185_1280.jpg",
   "chatter":"https://cdn.pixabay.com/photo/2014/07/25/08/55/bar-401546_1280.jpg",
-  "chant":"https://cdn.pixabay.com/photo/2014/05/03/01/02/concert-336695_1280.jpg",
+  "chant":"https://cdn.pixabay.com/photo/2014/01/24/10/40/singer-250933_1280.jpg",
   "clatter":"https://cdn.pixabay.com/photo/2020/02/06/19/01/clutter-4825256_1280.jpg",
   "clunk":"https://cdn.pixabay.com/photo/2017/01/10/03/06/steel-1968194_1280.jpg",
-  "crawl":"https://cdn.pixabay.com/photo/2015/09/02/03/56/soldier-917947_1280.jpg",
+  "crawl":"https://cdn.pixabay.com/photo/2017/11/28/10/17/snail-2983235_1280.jpg",
   "flick":"https://cdn.pixabay.com/photo/2012/02/23/08/48/disgust-15793_1280.jpg",
   "giggle":"https://cdn.pixabay.com/photo/2017/08/07/15/18/people-2604850_1280.jpg",
   "gargle":"https://cdn.pixabay.com/photo/2017/04/03/16/32/girl-smoke-cigarette-2198839_1280.jpg",
@@ -92,9 +130,26 @@ const emotions = [
   new EmotionObject("sad", "feeling or showing sorrow; unhappy.", "grey", ["bawl","whine","waah"]),
   new EmotionObject("surprised", "to feel mild astonishment or shock.", "purple", ["boom","honk","zing"]),
   new EmotionObject("fearful", "feeling afraid; showing fear or anxiety.", "green", ["buzz","caw","crawl"]),
-  new EmotionObject("disgusted", "feeling or showing strong annoyance, displeasure, or hostility; full of anger.", "orange", ["flick","gargle","oink"])
+  new EmotionObject("disgusted", "feeling or showing strong annoyance, displeasure, or hostility; full of anger.", "orange", ["flick","gargle","oink"]),
+  new EmotionObject("excited", "feeling or showing strong annoyance, displeasure, or hostility; full of anger.", "black", ["flick","gargle","oink"]),
+  new EmotionObject("tired", "feeling or showing strong annoyance, displeasure, or hostility; full of anger.", "pink", ["flick","gargle","oink"])
 ];
 
-// category というテキストは別でも良さそう
-// 9つの感情のボックスはemotionBoxというコンテナを作り、それぞれループして表示
-// 感情ボックスの中は
+let cardItem = `<div class="card-items">`
+let contentsItem = "";
+for(let i = 0; i < emotions.length; i++) {
+  // onomatopoeia[0]は画像を仕様に合わせて入れるためのもの
+  cardItem += `
+  <a class="card-item ${emotions[i].getColor()}" href="#sec${i}">
+    <h2 class="card-item-title">${emotions[i].emotion}</h2>
+    <img src="${pictureDictionary[emotions[i].onomatopoeia[0]]}" class="card-item-image">
+  </a>
+  `
+  contentsItem += `<div class="word-detail ${emotions[i].getColor()}" id="sec${i}">`;
+  contentsItem += emotions[i].getHtmlContainerString();
+  contentsItem += `</div>`
+}
+
+cardItem += `</div>`;
+
+document.getElementById("target").innerHTML = cardItem + contentsItem;
