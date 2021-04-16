@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>boxsizechanger</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+  <link rel="stylesheet" href="./css/style.css">
+</head>
+<body>
+  <div class="m-2">
+    <div class="box bg-primary d-block" id="pBlock">
+    </div>
+    <p>press up and down</p>
+    
+    
+    <div>
+      <!-- ***上級者向け*** イベントオブジェクトのインスタンスを取得するdispatchEvent関数を使用してイベントをトリガーすることができます。DispatchEventは他にもたくさんのイベントオブジェクトを取り込むことができるので、興味があればJSのドキュメントを参照してください。 -->
+      
+      <!-- 要素がクリックされた時、body要素に対してKeyboardEventを実行。https://ja.javascript.info/dispatch-events
+      KeyboardEvent("種類", "初期化")。キーが押された時、keyをArrowUpに設定します。https://developer.mozilla.org/en-US/docs/Web/API/KeyboardEvent/KeyboardEvent -->
+      <button class="btn" onclick="document.getElementsByTagName(`body`).item(0).dispatchEvent(new KeyboardEvent('keydown',{'key':'ArrowUp'}))">+</button>
+      <button class="btn" onclick="document.getElementsByTagName(`body`).item(0).dispatchEvent(new KeyboardEvent('keydown',{'key':'ArrowDown'}))">-</button>
+    </div>
+  </div>
+  <script src="./js/index.js"></script>
+</body>
+</html>
