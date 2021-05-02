@@ -37,15 +37,13 @@ main.setAttribute("data-index", "0");
 // animationTypeというパラメータを追加
 function slideJump(steps, animationType) {
   let index = parseInt(main.getAttribute("data-index"));
-  // let currentElement = sliderItems[index];
-  let currentElement = sliderItems.item(index);
+  let currentElement = sliderItems[index];
 
   index += steps;
   
   if(index < 0) index = sliderItems.length - 1;
   else if(index >= sliderItems.length) index = 0;
-  // let nextElement = sliderItems[index];
-  let nextElement = sliderItems.item(index);
+  let nextElement = sliderItems[index];
 
   main.setAttribute("data-index", index.toString());
   animateMain(currentElement, nextElement, animationType);
